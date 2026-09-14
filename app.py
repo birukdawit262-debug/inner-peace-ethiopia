@@ -8,22 +8,17 @@ st.set_page_config(
     layout="centered"
 )
 
-# 2. Premium Zen Styling & Theme Engine (የገጽታ እና የከለር ማሳመሪያ)
+# 2. Premium Zen Styling & Theme Engine
 st.markdown("""
 <style>
-    /* አጠቃላይ የጀርባ ገጽታ እና የንባብ ፎንት */
     .stApp {
         background: linear-gradient(180deg, #F4FBF7 0%, #FFFFFF 100%);
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    
-    /* የማውጫው (Sidebar) ማሳመሪያ */
     section[data-testid="stSidebar"] {
         background-color: #E6F4EA !important;
         border-right: 1px solid #CEEAD6;
     }
-    
-    /* የካርዶች እና የሳጥኖች ውበት */
     div[data-testid="stExpander"] {
         background-color: #FFFFFF !important;
         border-radius: 12px !important;
@@ -31,8 +26,6 @@ st.markdown("""
         box-shadow: 0 4px 12px rgba(0, 77, 64, 0.05) !important;
         margin-bottom: 12px !important;
     }
-    
-    /* አዝራሮች (Buttons) */
     .stButton>button {
         background: linear-gradient(135deg, #00796B, #004D40) !important;
         color: white !important;
@@ -52,7 +45,7 @@ st.markdown("""
 
 # 3. Hero Header & Branding
 st.markdown("""
-<div style='text-align: center; background: linear-gradient(135deg, #004D40, #00796B); padding: 28px; border-radius: 20px; color: white; margin-bottom: 25px; box-shadow: 0 6px 20px rgba(0,77,64,0.25);'>
+<div style='text-align: center; background: linear-gradient(135deg, #004D40, #00796B); padding: 28px; border-radius: 20px; color: white; margin-bottom: 20px; box-shadow: 0 6px 20px rgba(0,77,64,0.25);'>
     <h1 style='margin: 0; font-size: 30px; letter-spacing: 0.5px;'>🧘‍♂️ የውስጥ ሰላም እና የዳማ ታላቅ ማዕከል</h1>
     <p style='margin: 8px 0 0 0; font-size: 16px; opacity: 0.95; font-weight: 300;'>Inner Peace & Meditation Ethiopia (Hawassa)</p>
     <hr style='border: 0.5px solid rgba(255,255,255,0.3); margin: 15px 0;'>
@@ -61,6 +54,15 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
+
+# አዲስ ተጠቃሚዎችን የሚመራ አጭር መመሪያ (Welcome Guide)
+with st.expander("👋 እንኳን ደህና መጡ! አፑን እንዴት እንደሚጠቀሙበት አጭር መመሪያ (Guide)", expanded=True):
+    st.markdown("""
+    1. 📖 **ክፍሎችን ለማንበብ፦** በግራ በኩል ያለውን ማውጫ (Sidebar) በመንካት ከክፍል 1 እስከ 10 ያሉትን ጥልቅ ትምህርቶች መምረጥ ይችላሉ።
+    2. ⏱️ **ለማሰላሰል፦** ወደ **ክፍል 9 (ማሰላሰያ ስቱዲዮ)** በመሄድ የትንፋሽ ቆጣሪውን አስነስተው በቀጥታ ይለማመዱ።
+    3. 🤔 **ጥያቄዎችን ለመመለስ፦** በእያንዳንዱ ክፍል ስር ያሉትን በይነተገናኝ ማስተንተኛዎች በመንካት ለራስዎ የተለየ የዳማ ፈውስ ያግኙ።
+    4. 📱 **በስልክ ስክሪን ላይ ለመጫን፦** በስልክዎ Chrome ከላይ 3 ነጥቦችን (`⋮`) ተጭነው **"Add to Home screen"** ይበሉት!
+    """)
 
 # 4. Sidebar Navigation
 with st.sidebar:
