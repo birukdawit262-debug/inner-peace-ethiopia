@@ -40,6 +40,60 @@ st.markdown("""
         transform: translateY(-2px);
         box-shadow: 0 6px 15px rgba(0, 77, 64, 0.3) !important;
     }
+
+    /* ========================================================================= */
+    /* 🌟 የትምህርት ማውጫውን (Curriculum) ወደ ውብ Zen Cards የመቀየሪያ አዲስ ስታይል 🌟 */
+    /* ========================================================================= */
+    div[data-testid="stRadio"] > label {
+        display: none !important; /* አላስፈላጊውን የተጨናነቀ ነባሪ ሌብል ያጠፋል */
+    }
+
+    div[role="radiogroup"] {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important; /* በምዕራፎቹ መሃል በቂ እና ንጹህ ክፍተት ይሰጣል */
+        padding-top: 5px !important;
+    }
+
+    /* እያንዳንዱ የሜኑ አማራጭ እንደ ራሱን የቻለ የተከበረ ካርድ እንዲሆን */
+    div[role="radiogroup"] > label {
+        background: #FFFFFF !important;
+        padding: 12px 14px !important;
+        border-radius: 12px !important;
+        border: 1.5px solid #D1E7DD !important;
+        box-shadow: 0 2px 6px rgba(0, 77, 64, 0.04) !important;
+        cursor: pointer !important;
+        transition: all 0.25s ease-in-out !important;
+        margin-bottom: 2px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* ማውዙ ሲያርፍበት (Hover) ለስላሳ አረንጓዴ ጥላ እና ትንሽ ከፍ የማለት ድምቀት */
+    div[role="radiogroup"] > label:hover {
+        border-color: #00796B !important;
+        background-color: #F0FDF4 !important;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 14px rgba(0, 121, 107, 0.15) !important;
+    }
+
+    /* የተመረጠው ምዕራፍ (Active) ሲሆን በኤመራልድ አረንጓዴ ጎልቶ እንዲታይ */
+    div[role="radiogroup"] > label[data-checked="true"],
+    div[role="radiogroup"] > label:has(input:checked) {
+        background: linear-gradient(135deg, #E0F2F1 0%, #C8E6C9 100%) !important;
+        border: 2px solid #00796B !important;
+        font-weight: 700 !important;
+        box-shadow: 0 4px 14px rgba(0, 77, 64, 0.2) !important;
+    }
+
+    /* የምዕራፉ ጽሁፍ ግልጽ፣ ጥርት ያለ እና ለማንበብ ምቹ እንዲሆን */
+    div[role="radiogroup"] > label p {
+        font-size: 0.95rem !important;
+        color: #004D40 !important;
+        line-height: 1.4 !important;
+        margin: 0 !important;
+        font-weight: 600 !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
