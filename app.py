@@ -8,17 +8,29 @@ st.set_page_config(
     layout="centered"
 )
 
-# 2. Premium Zen Styling & Theme Engine
+# 2. Premium Zen Styling & Theme Engine (ያንተ ማሻሻያ + የሞባይል Scrolling መፍትሄ)
 st.markdown("""
 <style>
+    /* 🚀 ለሞባይል ስክሪን ፈጣን እና ልስላሴ ያለው Scrolling (Smooth Mobile Touch) */
+    html, body, [data-testid="stAppViewContainer"], section[data-testid="stSidebar"] {
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        scroll-behavior: smooth !important;
+    }
+
+    /* አጠቃላይ የጀርባ ገጽታ እና የንባብ ፎንት */
     .stApp {
         background: linear-gradient(180deg, #F4FBF7 0%, #FFFFFF 100%);
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+    
+    /* የማውጫው (Sidebar) ማሳመሪያ */
     section[data-testid="stSidebar"] {
         background-color: #E6F4EA !important;
         border-right: 1px solid #CEEAD6;
     }
+    
+    /* የካርዶች እና የሳጥኖች ውበት */
     div[data-testid="stExpander"] {
         background-color: #FFFFFF !important;
         border-radius: 12px !important;
@@ -26,6 +38,8 @@ st.markdown("""
         box-shadow: 0 4px 12px rgba(0, 77, 64, 0.05) !important;
         margin-bottom: 12px !important;
     }
+    
+    /* አዝራሮች (Buttons) */
     .stButton>button {
         background: linear-gradient(135deg, #00796B, #004D40) !important;
         color: white !important;
@@ -42,20 +56,20 @@ st.markdown("""
     }
 
     /* ========================================================================= */
-    /* 🌟 የትምህርት ማውጫውን (Curriculum) ወደ ውብ Zen Cards የመቀየሪያ አዲስ ስታይል 🌟 */
+    /* 🌟 አንተ የፈጠርከው የትምህርት ማውጫ Zen Cards ስታይል (100% የተጠበቀ) 🌟 */
     /* ========================================================================= */
     div[data-testid="stRadio"] > label {
-        display: none !important; /* አላስፈላጊውን የተጨናነቀ ነባሪ ሌብል ያጠፋል */
+        display: none !important;
     }
 
     div[role="radiogroup"] {
         display: flex !important;
         flex-direction: column !important;
-        gap: 10px !important; /* በምዕራፎቹ መሃል በቂ እና ንጹህ ክፍተት ይሰጣል */
+        gap: 10px !important;
         padding-top: 5px !important;
+        touch-action: pan-y !important; /* በስልክ ስትነካው Scrolling እንዳይቆም */
     }
 
-    /* እያንዳንዱ የሜኑ አማራጭ እንደ ራሱን የቻለ የተከበረ ካርድ እንዲሆን */
     div[role="radiogroup"] > label {
         background: #FFFFFF !important;
         padding: 12px 14px !important;
@@ -67,9 +81,9 @@ st.markdown("""
         margin-bottom: 2px !important;
         display: flex !important;
         align-items: center !important;
+        touch-action: pan-y !important; /* ጣት ሲያርፍበት ያለ ችግር እንዲንሸራተት */
     }
 
-    /* ማውዙ ሲያርፍበት (Hover) ለስላሳ አረንጓዴ ጥላ እና ትንሽ ከፍ የማለት ድምቀት */
     div[role="radiogroup"] > label:hover {
         border-color: #00796B !important;
         background-color: #F0FDF4 !important;
@@ -77,7 +91,6 @@ st.markdown("""
         box-shadow: 0 5px 14px rgba(0, 121, 107, 0.15) !important;
     }
 
-    /* የተመረጠው ምዕራፍ (Active) ሲሆን በኤመራልድ አረንጓዴ ጎልቶ እንዲታይ */
     div[role="radiogroup"] > label[data-checked="true"],
     div[role="radiogroup"] > label:has(input:checked) {
         background: linear-gradient(135deg, #E0F2F1 0%, #C8E6C9 100%) !important;
@@ -86,7 +99,6 @@ st.markdown("""
         box-shadow: 0 4px 14px rgba(0, 77, 64, 0.2) !important;
     }
 
-    /* የምዕራፉ ጽሁፍ ግልጽ፣ ጥርት ያለ እና ለማንበብ ምቹ እንዲሆን */
     div[role="radiogroup"] > label p {
         font-size: 0.95rem !important;
         color: #004D40 !important;
@@ -99,7 +111,7 @@ st.markdown("""
 
 # 3. Hero Header & Branding
 st.markdown("""
-<div style='text-align: center; background: linear-gradient(135deg, #004D40, #00796B); padding: 28px; border-radius: 20px; color: white; margin-bottom: 20px; box-shadow: 0 6px 20px rgba(0,77,64,0.25);'>
+<div id='top_page' style='text-align: center; background: linear-gradient(135deg, #004D40, #00796B); padding: 28px; border-radius: 20px; color: white; margin-bottom: 20px; box-shadow: 0 6px 20px rgba(0,77,64,0.25);'>
     <h1 style='margin: 0; font-size: 30px; letter-spacing: 0.5px;'>🧘‍♂️ የውስጥ ሰላም እና የዳማ ታላቅ ማዕከል</h1>
     <p style='margin: 8px 0 0 0; font-size: 16px; opacity: 0.95; font-weight: 300;'>Inner Peace & Meditation Ethiopia (Hawassa)</p>
     <hr style='border: 0.5px solid rgba(255,255,255,0.3); margin: 15px 0;'>
@@ -858,114 +870,4 @@ elif current_chapter.startswith("⏱️ ክፍል 9፦"):
             stage_box.markdown("""
             <div style='text-align: center; background-color: #FFF9C4; padding: 25px; border-radius: 15px; border: 2px solid #FBC02D;'>
                 <h2 style='color: #F57F17; margin: 0;'>⏸️ 2. ትንፋሽህን በእርጋታ ያዘው... (4s)</h2>
-                <p style='color: #F57F17; margin: 5px 0 0 0;'>በልብህ ውስጥ ያለውን ፍጹም ጸጥታ ተሰማው</p>
-            </div>
-            """, unsafe_allow_html=True)
-            time.sleep(4)
-
-            # 3. Exhale (4s)
-            stage_box.markdown("""
-            <div style='text-align: center; background-color: #E8F5E9; padding: 25px; border-radius: 15px; border: 2px solid #43A047;'>
-                <h2 style='color: #1B5E20; margin: 0;'>🍃 3. ትንፋሽ ቀስ ብለህ አስወጣ... (4s)</h2>
-                <p style='color: #2E7D32; margin: 5px 0 0 0;'>ውጥረትን፣ ፍርሃትን እና ድካምን በሙሉ ልቀቀው</p>
-            </div>
-            """, unsafe_allow_html=True)
-            time.sleep(4)
-
-            # 4. Rest (4s)
-            stage_box.markdown("""
-            <div style='text-align: center; background-color: #F3E5F5; padding: 25px; border-radius: 15px; border: 2px solid #AB47BC;'>
-                <h2 style='color: #6A1B9A; margin: 0;'>🧘 4. ዘና ብለህ አሳርፈው... (4s)</h2>
-                <p style='color: #6A1B9A; margin: 5px 0 0 0;'>በዚህ ቅጽበት ውስጥ ያለውን ሰላም አድንቀው</p>
-            </div>
-            """, unsafe_allow_html=True)
-            time.sleep(4)
-            
-            prog.progress((c + 1) / num_cycles)
-            
-        stage_box.success("🎉 ድንቅ ስራ! ማሰላሰልህን በሰላም አጠናቀሃል። ሰላም፣ ፍቅር እና ጤና ሁሌም ካንተ ጋር ይሁን!")
-        st.balloons()
-
-    st.write("---")
-    st.markdown("### 🌿 2. ለማሰላሰል የሚረዱ የተፈጥሮ ድምፆች መመሪያ (Sound Guide)")
-    st.write("በቤትህ፣ በስልክህ ወይም በቲቪህ የሚከተሉትን የተፈጥሮ ድምፆች ከፍተህ ማሰላሰል አእምሮን እጅግ ያረጋጋል፦")
-    
-    st.markdown("""
-    - 🔔 **የቲቤታን የሰላም ደወል (Tibetan Singing Bowl)፦** የአእምሮን ሞገድ (Alpha waves) በማስተካከል ወደ ጥልቅ ጸጥታ ያስገባል።
-    - 🌧️ **የተረጋጋ የዝናብ ድምፅ (Gentle Rain Sound)፦** የውጭ ጫጫታዎችን በመከልከል አእምሮ በአንድ ነጥብ እንዲሰበሰብ ይረዳል።
-    - 🌊 **የውቅያኖስ ማዕበል (Ocean Waves)፦** ከትንፋሽ መግባትና መውጣት ምት ጋር አንድ ላይ በመመሳሰል ውጥረትን ያጠፋል።
-    - 🌲 **የጫካ እና የወፎች ዝማሬ (Forest Nature)፦** ከከተማ ድካም አውጥቶ ከተፈጥሮ ሰላም ጋር ያገናኛል።
-    """)
-
-    st.write("---")
-    st.markdown("### 📝 3. የዕለቱ የማሰላሰል ማስታወሻ (Meditation Journal)")
-    st.write("ከማሰላሰልህ በኋላ የተሰማህን ስሜት ወይም ያገኘኸውን አዲስ ማስተዋል እዚህ መዝግበው፦")
-    
-    with st.form("meditation_journal_form"):
-        journal_text = st.text_area("የዛሬው የውስጥ ሰላሜ ማስታወሻ፦", placeholder="ዛሬ ካሰላሰልኩ በኋላ ልቤ በጣም ተረጋግቷል፤ ያንን የነበረኝን ጭንቀት መልቀቅ ችያለሁ...")
-        submit_journal = st.form_submit_button("💾 ማስታወሻዬን አስቀምጥ")
-        if submit_journal and journal_text:
-            st.success("🌸 ማስታወሻህ ተመዝግቧል!")
-            st.markdown(f"""
-            <div style='background-color: #F1F8E9; padding: 15px; border-radius: 10px; border-left: 5px solid #2E7D32;'>
-                <p style='margin: 0; color: #1B5E20;'><b>የተመዘገበው ማስታወሻህ፦</b> “{journal_text}”</p>
-                <small style='color: gray;'>የተመዘገበበት ቀን፦ ዛሬ | Inner Peace Ethiopia</small>
-            </div>
-            """, unsafe_allow_html=True)
-
-# ==============================================================================
-# ==================== ክፍል 10 ይዘት ============================================
-# ==============================================================================
-elif current_chapter.startswith("👑 ክፍል 10፦"):
-    st.markdown("## 👑 ክፍል 10፦ ማህበረሰቡ፣ የአማካሪዎች እውቅና እና ሚሽኑን መደገፊያ")
-    st.markdown("<p style='color: #00796B; font-size: 16px;'><i>Inner Peace & Meditation Ethiopia — የሰላም፣ የዳማ እና የማስተዋል ታላቅ ተልዕኮ</i></p>", unsafe_allow_html=True)
-    st.write("---")
-
-    st.markdown("""
-    **"Inner Peace & Meditation Ethiopia"** በኢትዮጵያ ውስጥ የአእምሮ ሰላምን፣ ማስተዋልን (Mindfulness)፣ የዳማ ፍልስፍናን እና ጤናማ የአኗኗር ዘይቤን ለማስፋፋት በሀዋሳ የተቋቋመ ታላቅ ማህበረሰብ ነው።
-    """)
-    st.write("---")
-
-    with st.expander("👑 1. የመስራቹ እና መሪው መረጃ (Founder & Lead)", expanded=True):
-        st.markdown("""
-        - **ስም፦** ብሩክ ዳዊት ኤልያስ (Biruk Dawit Elias)
-        - **የትምህርት ደረጃ፦** በኢንፎርሜሽን ቴክኖሎጂ የ 4ኛ ዓመት B.Sc. ተማሪ (IT Weekend Program) | Zion College Level IV + National COC Certified (GPA 3.62)
-        - **ተልዕኮ፦** በኢትዮጵያ ውስጥ የመጀመሪያው የዳማ፣ የማሰላሰል እና የውስጥ ሰላም ፈር-ቀዳጅ መሪ
-        - **አድራሻ፦** ሀዋሳ፣ ሲዳማ ክልል፣ ኢትዮጵያ
-        - **ስልክ ቁጥር፦** 📞 **+251 925 126 262**
-        - **ኢሜይል፦** 📧 **birukdawit262@gmail.com**
-        """)
-
-    with st.expander("🌟 2. የአለም አቀፍ እና የሀገር ውስጥ አማካሪዎች እውቅና (Special Acknowledgements)"):
-        st.markdown("""
-        ይህ ታላቅ የሰላም ሚሽን እውን እንዲሆን ላደረጉት ታላላቅ መካሪዎች እና አጋሮች ከልብ የመነጨ ምስጋና ይቀርባል፦
-        
-        - 🇮🇳 **Praveen PK (India)፦** ለጥልቅ የማሰላሰል መመሪያ፣ ለሜዲቴሽን አማካሪነት እና ላላሰለሰ መንፈሳዊ ድጋፍ (Meditation Mentorship & Guidance)።
-        - 🇮🇳 **Sayaji Salokhe (India)፦** ለዳማ ጥበብ፣ ለህይወት መመሪያ እና ለአእምሮ ሰላም ትምህርቶች (Spiritual Mentorship & Guidance)።
-        - 🇪🇹 **Kewani (Addis Ababa, Ethiopia)፦** ለሀገር ውስጥ ማህበረሰብ ትስስር እና አጋርነት (Community Partnership & Support)።
-        - 🌍 **የዳማ ቤተሰቦች (Dhamma Family Around the World)፦** በአለም ዙሪያ ለሚገኙ የሰላም እና የማስተዋል ቤተሰቦች በሙሉ!
-        """)
-
-    with st.expander("💖 3. የሰላም ሚሽኑን ይደግፉ (Support Our Mission / Dana Contribution)", expanded=True):
-        st.markdown("""
-        ይህንን በኢትዮጵያ ውስጥ የአእምሮ ሰላምን እና የማሰላሰል ትምህርትን የማስፋፋት ታላቅ ተልዕኮ በገንዘብም ሆነ በግብአት መደገፍ ለሚፈልጉ ደጋፊዎች በሙሉ፦
-        
-        <div style='background-color: #E8F5E9; padding: 20px; border-radius: 12px; border-left: 6px solid #2E7D32; margin: 15px 0;'>
-            <h4 style='color: #1B5E20; margin-top: 0;'>🏦 የኢትዮጵያ ንግድ ባንክ (CBE Account)</h4>
-            <p style='font-size: 18px; margin: 5px 0; color: #004D40;'><b>የሂሳብ ቁጥር (Account Number)፦</b> <code style='font-size: 20px; color: #1B5E20;'>1000225329625</code></p>
-            <p style='margin: 5px 0; color: #33691E;'><b>የሂሳብ ስም (Account Name)፦</b> ብሩክ ዳዊት ኤልያስ (Biruk Dawit Elias)</p>
-            <hr style='border: 0.5px solid #C8E6C9; margin: 10px 0;'>
-            <p style='margin: 0; font-size: 14px; color: #2E7D32;'>
-                📧 <b>ኢሜይል፦</b> birukdawit262@gmail.com | 📞 <b>ስልክ፦</b> +251 925 126 262
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-        st.success("የሚያደርጉት ማንኛውም ድጋፍ በኢትዮጵያ ውስጥ ሰላምን፣ ፍቅርን እና ማስተዋልን ለትውልድ ለማድረስ ይውላል! እናመሰግናለን!")
-
-# 5. Footer
-st.write("---")
-st.markdown("""
-<div style='text-align: center; color: gray; font-size: 13px;'>
-    🌿 <b>Inner Peace & Dhamma Ethiopia</b> | ሰላም ለውስጥህ፣ ሰላም ለዓለማችን! | Hawassa, Ethiopia
-</div>
-""", unsafe_allow_html=True)
+                <p style='color: #F57F17; m
